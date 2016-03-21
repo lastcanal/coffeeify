@@ -2,6 +2,7 @@
 var convert = require('convert-source-map');
 var path = require('path');
 var through = require('through2');
+var cmsx = require('cmsx');
 
 var filePattern = /\.((lit)?coffee|coffee\.md)$/;
 
@@ -48,7 +49,7 @@ ParseError.prototype.inspect = function () {
 function compile(filename, source, options, callback) {
     var compiled;
     try {
-        compiled = coffee.compile(source, {
+        compiled = coffee.compile(cmsx(source), {
             sourceMap: options.sourceMap,
             inline: true,
             bare: options.bare,
